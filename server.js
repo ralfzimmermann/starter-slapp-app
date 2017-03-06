@@ -38,6 +38,21 @@ slapp.message('Robert', ['mention', 'direct_message'], (msg) => {
   msg.say('What a dick!')
 })
 
+slapp.message('jens', ['mention', 'direct_message'], (msg) => {
+  msg.say('What a dick!')
+})
+
+slapp.message(/^(Jens|Robert|Frank|Isa|Jan|Daniel)/i, ['mention', 'direct_message'], (msg) => {
+	var text = (msg.body.event && msg.body.event.text) || '';
+
+	msg.say([
+      "🚀",
+      '💩',
+      ':+1: That\'s my man',
+      'Best colleague :sun_with_face: :full_moon_with_face:'
+    ])
+})
+
 // "Conversation" flow that tracks state - kicks off when user says hi, hello or hey
 slapp
   .message('^(hi|hello|hey)$', ['direct_mention', 'direct_message'], (msg, text) => {
