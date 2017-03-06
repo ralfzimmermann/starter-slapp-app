@@ -34,19 +34,19 @@ slapp.message('help', ['mention', 'direct_message'], (msg) => {
   msg.say(HELP_TEXT)
 })
 
-slapp.message('Robert', ['mention', 'direct_message'], (msg) => {
-  msg.say('What a dick!')
-})
+// slapp.message('Robert', ['mention', 'direct_message'], (msg) => {
+//   msg.say('What a dick!')
+// })
 
-slapp.message('jens', ['mention', 'direct_message'], (msg) => {
-  msg.say('What a dick!')
-})
+// slapp.message('jens', ['mention', 'direct_message'], (msg) => {
+//   msg.say('What a dick!')
+// })
 
-slapp.message(/^(Jens|Robert|Frank|Isa|Jan|Daniel)/i, ['mention', 'direct_message'], (msg) => {
-	var text = (msg.body.event && msg.body.event.text) || '';
+slapp.message(/^(Ralf|Jens|Robert|Frank|Isa|Jan|Daniel)/i, ['mention', 'direct_message'], (msg) => {
+	// var text = (msg.body.event && msg.body.event.text) || '';
 
 	msg.say([
-      "🚀",
+      '🚀',
       '💩',
       ':+1: That\'s my man',
       'Best colleague :sun_with_face: :full_moon_with_face:'
