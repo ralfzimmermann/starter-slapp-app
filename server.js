@@ -67,7 +67,6 @@ slapp.message('help', ['mention', 'direct_message'], (msg) => {
 
 slapp.message(/^(Ralf|Jens|Robert|Frank|Isa|Jan|Daniel)/i, ['mention', 'direct_message'], (msg) => {
 	// var text = (msg.body.event && msg.body.event.text) || '';
-
 	msg.say([
       '🚀',
       '💩',
@@ -133,12 +132,6 @@ slapp.message(/^(thanks|thank you)/i, ['mention', 'direct_message'], (msg) => {
   ])
 })
 
-// http://giphy.com/gifs/thread-appreciation-rappers-Mqz2DNuhWjFyU
-
-// http://giphy.com/gifs/kpop-k-pop-wink-26mfytBsu0XC9bVss
-
-// http://giphy.com/gifs/reactionseditor-reaction-l0IyjeA5mmMZjhyPm
-
 // demonstrate returning an attachment...
 slapp.message('attachment', ['mention', 'direct_message'], (msg) => {
   msg.say({
@@ -154,7 +147,7 @@ slapp.message('attachment', ['mention', 'direct_message'], (msg) => {
 })
 
 // Catch-all for any other responses not handled above
-slapp.message('.*', ['direct_mention', 'direct_message'], (msg) => {
+slapp.message('.*', ['direct_message'], (msg) => {
   // respond only 40% of the time
 
 	if (Math.random() < 0.4) {
@@ -165,13 +158,10 @@ slapp.message('.*', ['direct_mention', 'direct_message'], (msg) => {
 })
 
 // Catch all mentions of the bot
-slapp.message('cyberralle', ['mention', 'direct_message'], (msg) => {
+slapp.message('.*', ['direct_mention'], (msg) => {
   // respond only 40% of the time
-
-	// if (Math.random() < 0.4) {
-	// 	msg.say([':wave:', ':pray:', ':raised_hands:', ':kissing_heart:'])
-	// }else{
-	// }
+	
+	console.log("detected me");
 	getReactionGif(msg);
 })
 
