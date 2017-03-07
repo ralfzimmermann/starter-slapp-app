@@ -52,7 +52,7 @@ function getReactionGif(msg){
 		   	 text: '',
 		   	 title: '',
 			 //  	 image_url: jsonResponse.data.image_url,
-		   	 image_url: jsonResponse.data.images.downsized,
+		   	 image_url: jsonResponse.data.fixed_height_downsampled_url,
 		   	 title_link: '',
 		   	 color: ''
 		      }]
