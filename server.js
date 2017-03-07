@@ -48,10 +48,11 @@ slapp.message('help', ['mention', 'direct_message'], (msg) => {
 		  msg.say("Error: "+xhr.status);
 	    }
 	  }
-	};
+	}
+
 	xhr.open('GET', 'http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=reaction');
 	xhr.send(null);
-	msg.say(HELP_TEXT)
+	msg.say(HELP_TEXT);
 })
 
 // slapp.message('Robert', ['mention', 'direct_message'], (msg) => {
