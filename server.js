@@ -146,8 +146,16 @@ slapp.message('attachment', ['mention', 'direct_message'], (msg) => {
   })
 })
 
+// Catch all mentions of the bot
+slapp.message('cyberralle', ['mention'], (msg) => {
+  // respond only 40% of the time
+
+	console.log("detected me");
+	getReactionGif(msg);
+})
+
 // Catch-all for any other responses not handled above
-slapp.message('.*', ['direct_message'], (msg) => {
+slapp.message('.*', ['direct_message','direct_mention'], (msg) => {
   // respond only 40% of the time
 
 	if (Math.random() < 0.4) {
@@ -157,13 +165,7 @@ slapp.message('.*', ['direct_message'], (msg) => {
 	}
 })
 
-// Catch all mentions of the bot
-slapp.message('.*', ['direct_mention'], (msg) => {
-  // respond only 40% of the time
-	
-	console.log("detected me");
-	getReactionGif(msg);
-})
+
 
 // attach Slapp to express server
 var server = slapp.attachToExpress(express())
