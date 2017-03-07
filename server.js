@@ -43,8 +43,9 @@ function getReactionGif(msg){
         if (xhr.readyState == 4 && xhr.status == 200){
             // console.log(xhr.responseText);
 			var jsonResponse = JSON.parse(xhr.responseText);
-			console.log(jsonResponse);
-			msg.say(jsonResponse.data.url);
+			// console.log(jsonResponse);
+			msg.say(jsonResponse.data.image_url);
+			// msg.say(jsonResponse.data.url);
 
         }
     }
@@ -58,11 +59,11 @@ slapp.message('help', ['mention', 'direct_message'], (msg) => {
 })
 
 // Catch all mentions of the bot
-slapp.message(/^(cyberralle|@cyberralle)/i, ['mention','direct_message'], (msg) => {
+slapp.message('', ['mention'], (msg) => {
   // respond only 40% of the time
 
-	console.log("detected me");
-	msg.say("What?");
+	// console.log("detected me");
+	// msg.say("What?");
 	getReactionGif(msg);
 })
 
