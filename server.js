@@ -34,19 +34,24 @@ I will respond to the following messages 😎:
 
 // response to the user typing "help"
 slapp.message('help', ['mention', 'direct_message'], (msg) => {
-	request({
-	  url: 'http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=reaction',
-	  method: 'GET',
-	  data: {
-	    query1: 'value1'
-	  }
-	}, function(err, res, body) {
-	  console.log(res);
-	  console.log(body);
-	  msg.say("OUT: "+res);
-	});
 
-  msg.say(HELP_TEXT)
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function () {
+	  var DONE = 4; // readyState 4 means the request is done.
+	  var OK = 200; // status 200 is a successful return.
+	  if (xhr.readyState === DONE) {
+	    if (xhr.status === OK)
+	      console.log(xhr.responseText); // 'This is the returned text.'
+		  msg.say("RESPONSE: "+xhr.responseText);
+	    } else {
+	      console.log('Error: ' + xhr.status); // An error occurred during the request.
+		  msg.say("Error: "+xhr.status);
+	    }
+	  }
+	};
+	xhr.open('GET', 'http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=reaction');
+	xhr.send(null);
+	msg.say(HELP_TEXT)
 })
 
 // slapp.message('Robert', ['mention', 'direct_message'], (msg) => {
