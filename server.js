@@ -73,6 +73,21 @@ function getReactionGif(msg){
 //
 // })
 
+
+
+
+// slapp.event('file_share', (msg) => {
+slapp.message('^(message.file_share)$', ['mention', 'direct_message'], (msg) => {
+	console.log("DETECTED UPLOAD");
+	msg.say(":thumbsup: :cool:");
+  // let token = msg.meta.bot_token
+  // let id = msg.body.event.item.ts
+  // let channel = msg.body.event.item.channel
+  // slapp.client.reactions.add({token, 'smile', id, channel}, (err) => {
+  //   if (err) console.log('Error adding reaction', err)
+  // })
+})
+
 // add a smile reaction by the bot for any message reacted to
 slapp.event('file_shared', (msg) => {
 	console.log(msg);
@@ -84,18 +99,6 @@ slapp.event('file_shared', (msg) => {
 	// slapp.client.reactions.add({token, 'smile', id, channel}, (err) => {
 	// 	if (err) console.log('Error adding reaction', err)
 	// })
-})
-
-
-// slapp.event('file_share', (msg) => {
-slapp.message('file_shared', ['mention', 'direct_message'], (msg) => {
-	msg.say(":thumbsup: :cool:");
-  // let token = msg.meta.bot_token
-  // let id = msg.body.event.item.ts
-  // let channel = msg.body.event.item.channel
-  // slapp.client.reactions.add({token, 'smile', id, channel}, (err) => {
-  //   if (err) console.log('Error adding reaction', err)
-  // })
 })
 
 slapp.message('help', ['mention', 'direct_message'], (msg) => {
