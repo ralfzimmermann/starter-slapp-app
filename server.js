@@ -4,19 +4,9 @@ const express = require('express')
 const Slapp = require('slapp')
 const ConvoStore = require('slapp-convo-beepboop')
 const Context = require('slapp-context-beepboop')
+var request = require('ajax-request');
 
-function server()
-{
-   xmlhttp = new XMLHttpRequest();
-   xmlhttp.open("GET","http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=reaction", true);
-   xmlhttp.onreadystatechange=function(){
-         if (xmlhttp.readyState==4 && xmlhttp.status==200){
-           string=xmlhttp.responseText;
-			console.log(string);
-         }
-   }
-   xmlhttp.send();
-}
+
 
 // use `PORT` env var on Beep Boop - default to 3000 locally
 var port = process.env.PORT || 3000
@@ -44,7 +34,18 @@ I will respond to the following messages 😎:
 
 // response to the user typing "help"
 slapp.message('help', ['mention', 'direct_message'], (msg) => {
-	server();
+	request({
+	  url: 'http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=reaction',
+	  method: 'GET',
+	  data: {
+	    query1: 'value1'
+	  }
+	}, function(err, res, body) {
+	  console.log(res);
+	  console.log(body);
+	  msg.say("OUT: "+res);
+	});
+
   msg.say(HELP_TEXT)
 })
 
