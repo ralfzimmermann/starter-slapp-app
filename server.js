@@ -40,14 +40,14 @@ function getReactionGif(){
 
 	var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function(){
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
-            console.log(xmlhttp.responseText);
-			msg.say(xmlhttp.responseText);
+        if (xhr.readyState == 4 && xhr.status == 200){
+            console.log(xhr.responseText);
+			msg.say(xhr.responseText);
         }
     }
     xhr.open("GET", "http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=reaction", true);
     xhr.send();
-	
+
 }
 
 slapp.message('help', ['mention', 'direct_message'], (msg) => {
