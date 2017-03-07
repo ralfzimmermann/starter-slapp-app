@@ -87,7 +87,7 @@ slapp.event('file_shared', (msg) => {
 	console.log(token+" | "+id+" | "+file);
 
 
-	slapp.client.reactions.add({token, name, file}, (err, data) => {
+	slapp.client.reactions.add({token, 'smile', file}, (err, data) => {
 		console.log(err);
 	})
 
