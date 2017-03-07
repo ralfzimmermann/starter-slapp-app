@@ -44,7 +44,19 @@ function getReactionGif(msg){
             // console.log(xhr.responseText);
 			var jsonResponse = JSON.parse(xhr.responseText);
 			// console.log(jsonResponse);
-			msg.say(jsonResponse.data.image_url);
+			// msg.say(jsonResponse.data.image_url);
+
+			msg.say({
+		      text: '',
+		      attachments: [{
+		   	 text: '',
+		   	 title: '',
+		   	 image_url: jsonResponse.data.image_url,
+		   	 title_link: 'http://giphy.com',
+		   	 color: '#7CD197'
+		      }]
+		    })
+
 			// msg.say(jsonResponse.data.url);
 
         }
