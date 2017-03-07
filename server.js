@@ -66,12 +66,17 @@ function getReactionGif(msg){
     xhr.send();
 
 }
+slapp.event('file_shared', (msg) => {
 
+	msg.say(":thumbsup:");
+	getReactionGif(msg);
+
+})
 
 
 // slapp.event('file_share', (msg) => {
 slapp.message('file_share', ['mention', 'direct_message'], (msg) => {
-	msg.say(":thumbsup:");
+	msg.say(":thumbsup: :cool:");
   // let token = msg.meta.bot_token
   // let id = msg.body.event.item.ts
   // let channel = msg.body.event.item.channel
