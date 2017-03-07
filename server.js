@@ -80,12 +80,18 @@ slapp.event('file_shared', (msg) => {
 	// msg.say(":thumbsup:");
 
 	let token = msg.meta.bot_token
-	let id = msg.body.event.item.ts
+	let id = msg.body.event.event_ts
+	let file = msg.body.event.file_id
 	let channel = msg.body.event.item.channel
+
 	console.log(token+" | "+id+" | "+channel);
-	slapp.client.reactions.add({token, 'smile', id, channel}, (err) => {
-	// 	if (err) console.log('Error adding reaction', err)
+
+
+	slapp.client.reactions.add({token, name, file}, (err, data) => {
+		console.log(err);
 	})
+
+	// slapp.client.reactions.add({token, 'smile',  file, '', '', ts });
 })
 
 slapp.message('help', ['mention', 'direct_message'], (msg) => {
