@@ -51,9 +51,10 @@ function getReactionGif(msg){
 		      attachments: [{
 		   	 text: '',
 		   	 title: '',
-		   	 image_url: jsonResponse.data.image_url,
-		   	 title_link: 'http://giphy.com',
-		   	 color: '#7CD197'
+			 //  	 image_url: jsonResponse.data.image_url,
+		   	 image_url: jsonResponse.data.images.downsized,
+		   	 title_link: '',
+		   	 color: ''
 		      }]
 		    })
 
