@@ -5,6 +5,19 @@ const Slapp = require('slapp')
 const ConvoStore = require('slapp-convo-beepboop')
 const Context = require('slapp-context-beepboop')
 
+function server()
+{
+   xmlhttp = new XMLHttpRequest();
+   xmlhttp.open("GET","http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=reaction", true);
+   xmlhttp.onreadystatechange=function(){
+         if (xmlhttp.readyState==4 && xmlhttp.status==200){
+           string=xmlhttp.responseText;
+			console.log(string);
+         }
+   }
+   xmlhttp.send();
+}
+
 // use `PORT` env var on Beep Boop - default to 3000 locally
 var port = process.env.PORT || 3000
 
@@ -31,6 +44,7 @@ I will respond to the following messages 😎:
 
 // response to the user typing "help"
 slapp.message('help', ['mention', 'direct_message'], (msg) => {
+	server();
   msg.say(HELP_TEXT)
 })
 
@@ -109,6 +123,12 @@ slapp.message(/^(thanks|thank you)/i, ['mention', 'direct_message'], (msg) => {
     'Anytime :sun_with_face: :full_moon_with_face:'
   ])
 })
+
+// http://giphy.com/gifs/thread-appreciation-rappers-Mqz2DNuhWjFyU
+
+// http://giphy.com/gifs/kpop-k-pop-wink-26mfytBsu0XC9bVss
+
+// http://giphy.com/gifs/reactionseditor-reaction-l0IyjeA5mmMZjhyPm
 
 // demonstrate returning an attachment...
 slapp.message('attachment', ['mention', 'direct_message'], (msg) => {
