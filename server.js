@@ -57,6 +57,15 @@ slapp.message('help', ['mention', 'direct_message'], (msg) => {
 	msg.say(HELP_TEXT);
 })
 
+// Catch all mentions of the bot
+slapp.message(/^(cyberralle|@cyberralle)/i, ['mention','direct_message'], (msg) => {
+  // respond only 40% of the time
+
+	console.log("detected me");
+	msg.say("What?");
+	getReactionGif(msg);
+})
+
 // slapp.message('Robert', ['mention', 'direct_message'], (msg) => {
 //   msg.say('What a dick!')
 // })
@@ -146,14 +155,7 @@ slapp.message('attachment', ['mention', 'direct_message'], (msg) => {
   })
 })
 
-// Catch all mentions of the bot
-slapp.message(/^(cyberralle|@cyberralle)/i, ['mention'], (msg) => {
-  // respond only 40% of the time
 
-	console.log("detected me");
-	msg.say("What?");
-	getReactionGif(msg);
-})
 
 // Catch-all for any other responses not handled above
 slapp.message('.*', ['direct_message','direct_mention'], (msg) => {
