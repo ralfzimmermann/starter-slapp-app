@@ -33,25 +33,46 @@ I will respond to the following messages 😎:
 //*********************************************
 
 // response to the user typing "help"
-slapp.message('help', ['mention', 'direct_message'], (msg) => {
+function getReactionGif(){
+	http.get('http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=reaction', (res) => {
+	  const statusCode = res.statusCode;
+	  const contentType = res.headers['content-type'];
 
-	var xhr = new XMLHttpRequest();
-	xhr.onreadystatechange = function () {
-	  var DONE = 4; // readyState 4 means the request is done.
-	  var OK = 200; // status 200 is a successful return.
-	  if (xhr.readyState === DONE) {
-	    if (xhr.status === OK){
-	      console.log(xhr.responseText); // 'This is the returned text.'
-		  msg.say("RESPONSE: "+xhr.responseText);
-	    } else {
-	      console.log('Error: ' + xhr.status); // An error occurred during the request.
-		  msg.say("Error: "+xhr.status);
-	    }
+	  let error;
+	  if (statusCode !== 200) {
+	    error = new Error(`Request Failed.\n` +
+	                      `Status Code: ${statusCode}`);
+	  } else if (!/^application\/json/.test(contentType)) {
+	    error = new Error(`Invalid content-type.\n` +
+	                      `Expected application/json but received ${contentType}`);
 	  }
-	}
+	  if (error) {
+	    console.log(error.message);
+	    // consume response data to free up memory
+	    res.resume();
+	    return;
+	  }
 
-	xhr.open('GET', 'http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=reaction');
-	xhr.send(null);
+	  res.setEncoding('utf8');
+	  let rawData = '';
+	  res.on('data', (chunk) => rawData += chunk);
+	  res.on('end', () => {
+	    try {
+	      let parsedData = JSON.parse(rawData);
+	      console.log(parsedData);
+		  msg.say(parsedData);
+	    } catch (e) {
+	      console.log(e.message);
+	    }
+	  });
+	}).on('error', (e) => {
+	  console.log(`Got error: ${e.message}`);
+	});
+}
+
+slapp.message('help', ['mention', 'direct_message'], (msg) => {
+	getReactionGif();
+
 	msg.say(HELP_TEXT);
 })
 
