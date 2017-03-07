@@ -67,6 +67,18 @@ function getReactionGif(msg){
 
 }
 
+
+
+slapp.event('file_shared', (msg) => {
+	msg.say(":thumbsup:");
+  // let token = msg.meta.bot_token
+  // let id = msg.body.event.item.ts
+  // let channel = msg.body.event.item.channel
+  // slapp.client.reactions.add({token, 'smile', id, channel}, (err) => {
+  //   if (err) console.log('Error adding reaction', err)
+  // })
+})
+
 slapp.message('help', ['mention', 'direct_message'], (msg) => {
 	msg.say(HELP_TEXT);
 })
