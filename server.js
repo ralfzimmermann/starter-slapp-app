@@ -41,8 +41,11 @@ function getReactionGif(){
 	var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function(){
         if (xhr.readyState == 4 && xhr.status == 200){
-            console.log(xhr.responseText);
-			msg.say(xhr.responseText);
+            // console.log(xhr.responseText);
+			var jsonResponse = JSON.parse(xhr.responseText);
+			console.log(jsonResponse);
+			slapp.say(jsonResponse.data.url);
+
         }
     }
     xhr.open("GET", "http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=reaction", true);
