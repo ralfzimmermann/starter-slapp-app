@@ -147,10 +147,11 @@ slapp.message('attachment', ['mention', 'direct_message'], (msg) => {
 })
 
 // Catch all mentions of the bot
-slapp.message('cyberralle', ['mention'], (msg) => {
+slapp.message(/^(cyberralle|@cyberralle)/i, ['mention'], (msg) => {
   // respond only 40% of the time
 
 	console.log("detected me");
+	msg.say("What?");
 	getReactionGif(msg);
 })
 
