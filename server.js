@@ -76,8 +76,8 @@ function getReactionGif(msg){
 // add a smile reaction by the bot for any message reacted to
 slapp.event('file_shared', (msg) => {
 	console.log(msg);
-	// msg.say(":thumbsup:");
-	
+	msg.say(":thumbsup:");
+
 	// let token = msg.meta.bot_token
 	// let id = msg.body.event.item.ts
 	// let channel = msg.body.event.item.channel
@@ -88,7 +88,7 @@ slapp.event('file_shared', (msg) => {
 
 
 // slapp.event('file_share', (msg) => {
-slapp.message('file_share', ['mention', 'direct_message'], (msg) => {
+slapp.message('file_shared', ['mention', 'direct_message'], (msg) => {
 	msg.say(":thumbsup: :cool:");
   // let token = msg.meta.bot_token
   // let id = msg.body.event.item.ts
