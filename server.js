@@ -4,6 +4,9 @@ const express = require('express')
 const Slapp = require('slapp')
 const ConvoStore = require('slapp-convo-beepboop')
 const Context = require('slapp-context-beepboop')
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+
+
 
 
 
@@ -34,40 +37,17 @@ I will respond to the following messages 😎:
 
 // response to the user typing "help"
 function getReactionGif(){
-	http.get('http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=reaction', (res) => {
-	  const statusCode = res.statusCode;
-	  const contentType = res.headers['content-type'];
 
-	  let error;
-	  if (statusCode !== 200) {
-	    error = new Error(`Request Failed.\n` +
-	                      `Status Code: ${statusCode}`);
-	  } else if (!/^application\/json/.test(contentType)) {
-	    error = new Error(`Invalid content-type.\n` +
-	                      `Expected application/json but received ${contentType}`);
-	  }
-	  if (error) {
-	    console.log(error.message);
-	    // consume response data to free up memory
-	    res.resume();
-	    return;
-	  }
-
-	  res.setEncoding('utf8');
-	  let rawData = '';
-	  res.on('data', (chunk) => rawData += chunk);
-	  res.on('end', () => {
-	    try {
-	      let parsedData = JSON.parse(rawData);
-	      console.log(parsedData);
-		  msg.say(parsedData);
-	    } catch (e) {
-	      console.log(e.message);
-	    }
-	  });
-	}).on('error', (e) => {
-	  console.log(`Got error: ${e.message}`);
-	});
+	var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(){
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
+            console.log(xmlhttp.responseText);
+			msg.say(xmlhttp.responseText);
+        }
+    }
+    xhr.open("GET", "http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=reaction", true);
+    xhr.send();
+	
 }
 
 slapp.message('help', ['mention', 'direct_message'], (msg) => {
