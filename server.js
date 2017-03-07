@@ -82,10 +82,11 @@ slapp.event('file_shared', (msg) => {
 	let token = msg.meta.bot_token
 	let id = msg.body.event.event_ts
 	let file = msg.body.event.file_id
-	// let channel = msg.body.event.item.channel+
-	let reaction_name = 'smile';
+	// let channel = msg.body.event.item.channel+reaction_name
+	let reactions = ["grin","smile","stuck_out_tongue_winking_eye",":sleepy:",":cold_sweat:"]
+	var reaction_name = reactions[Math.floor(Math.random()*reactions.length)];
 
-	console.log(token+" | "+id+" | "+file);
+	// console.log(token+" | "+id+" | "+file);
 
 
 	slapp.client.reactions.add({ 'token':token, 'name':reaction_name,'file':file }, (err, data) => {
