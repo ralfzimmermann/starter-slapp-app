@@ -36,15 +36,15 @@ I will respond to the following messages 😎:
 //*********************************************
 
 // response to the user typing "help"
-function getReactionGif(){
-
+function getReactionGif(msg){
+	msg.say("Fetching Reaction Gifs...");
 	var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function(){
         if (xhr.readyState == 4 && xhr.status == 200){
             // console.log(xhr.responseText);
 			var jsonResponse = JSON.parse(xhr.responseText);
 			console.log(jsonResponse);
-			slapp.say(jsonResponse.data.url);
+			msg.say(jsonResponse.data.url);
 
         }
     }
@@ -54,7 +54,7 @@ function getReactionGif(){
 }
 
 slapp.message('help', ['mention', 'direct_message'], (msg) => {
-	getReactionGif();
+	getReactionGif(msg);
 
 	msg.say(HELP_TEXT);
 })
