@@ -82,12 +82,13 @@ slapp.event('file_shared', (msg) => {
 	let token = msg.meta.bot_token
 	let id = msg.body.event.event_ts
 	let file = msg.body.event.file_id
-	// let channel = msg.body.event.item.channel
+	// let channel = msg.body.event.item.channel+
+	let reaction_name = 'smile';
 
 	console.log(token+" | "+id+" | "+file);
 
 
-	slapp.client.reactions.add({token, 'smile', file}, (err, data) => {
+	slapp.client.reactions.add({token, reaction_name , file }, (err, data) => {
 		console.log(err);
 	})
 
