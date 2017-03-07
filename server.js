@@ -37,7 +37,7 @@ I will respond to the following messages 😎:
 
 // response to the user typing "help"
 function getReactionGif(msg){
-	msg.say("Fetching Reaction Gifs...");
+	// msg.say("Fetching Reaction Gifs...");
 	var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function(){
         if (xhr.readyState == 4 && xhr.status == 200){
@@ -54,8 +54,6 @@ function getReactionGif(msg){
 }
 
 slapp.message('help', ['mention', 'direct_message'], (msg) => {
-	getReactionGif(msg);
-
 	msg.say(HELP_TEXT);
 })
 
@@ -158,9 +156,23 @@ slapp.message('attachment', ['mention', 'direct_message'], (msg) => {
 // Catch-all for any other responses not handled above
 slapp.message('.*', ['direct_mention', 'direct_message'], (msg) => {
   // respond only 40% of the time
-  if (Math.random() < 0.4) {
-    msg.say([':wave:', ':pray:', ':raised_hands:'])
-  }
+
+	if (Math.random() < 0.4) {
+		msg.say([':wave:', ':pray:', ':raised_hands:', ':kissing_heart:',':monkey:'])
+	}else{
+		// getReactionGif(msg);
+	}
+})
+
+// Catch all mentions of the bot
+slapp.message('cyberralle', ['mention', 'direct_message'], (msg) => {
+  // respond only 40% of the time
+
+	// if (Math.random() < 0.4) {
+	// 	msg.say([':wave:', ':pray:', ':raised_hands:', ':kissing_heart:'])
+	// }else{
+	// }
+	getReactionGif(msg);
 })
 
 // attach Slapp to express server
@@ -171,6 +183,5 @@ server.listen(port, (err) => {
   if (err) {
     return console.error(err)
   }
-
   console.log(`Listening on port ${port}`)
 })
